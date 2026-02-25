@@ -162,6 +162,23 @@ body {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.file-field input[type="file"] {
+  padding: 10px 12px;
+  border: 1px dashed var(--line);
+  background: #fff;
+}
+
+.file-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.file-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
