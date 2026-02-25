@@ -132,7 +132,7 @@ var (
 
 func main() {
 	mathrand.Seed(time.Now().UnixNano())
-	_ = loadDotEnv(".env", "../.env")
+	// _ = loadDotEnv(".env", "../.env")
 
 	captcha := newCaptchaStore()
 	mux := http.NewServeMux()
