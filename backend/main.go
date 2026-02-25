@@ -256,7 +256,7 @@ func validateRequest(req submitRequest, captcha *captchaStore) map[string]string
 		errorsMap["message"] = "required"
 	}
 
-	if strings.TrimSpace(req.Inn) != "" && !innDigits.MatchString(req.Inn) {
+	if strings.TrimSpace(req.Inn) != "" && !isServiceRequest(req) && !innDigits.MatchString(req.Inn) {
 		errorsMap["inn"] = "format"
 	}
 
@@ -316,8 +316,14 @@ func sendEmail(req submitRequest) error {
 	body.WriteString(fmt.Sprintf("Отчество: %s\n", req.MiddleName))
 	body.WriteString(fmt.Sprintf("Телефон: %s\n", req.Phone))
 	body.WriteString(fmt.Sprintf("Email: %s\n", req.Email))
-	body.WriteString(fmt.Sprintf("Заводской номер прибора: %s\n", req.SerialNumber))
-	body.WriteString(fmt.Sprintf("ИНН компании: %s\n", req.Inn))
+	serialLabel := "Заводской номер прибора"
+	innLabel := "ИНН компании"
+	if isServiceRequest(req) {
+		serialLabel = "Название компании"
+		innLabel = "Страна/регион"
+	}
+	body.WriteString(fmt.Sprintf("%s: %s\n", serialLabel, req.SerialNumber))
+	body.WriteString(fmt.Sprintf("%s: %s\n", innLabel, req.Inn))
 	body.WriteString("Сообщение:\n")
 	body.WriteString(req.Message)
 	body.WriteString("\n\n")
@@ -419,6 +425,10 @@ func resolveFrontendDir() string {
 		}
 	}
 	return "./"
+}
+
+func isServiceRequest(req submitRequest) bool {
+	return strings.EqualFold(strings.TrimSpace(req.RequestType), "Сервис")
 }
 
 func randomToken(size int) (string, error) {

@@ -5,6 +5,11 @@ const captchaRefresh = document.getElementById("captcha-refresh");
 
 let captchaToken = "";
 let config = {};
+let requestTypeSelect = null;
+let serialLabel = null;
+let innLabel = null;
+let serialInput = null;
+let innInput = null;
 
 async function loadConfig() {
   try {
@@ -31,6 +36,27 @@ function updatePageContent() {
   supportPhoneEls.forEach(el => {
     el.textContent = config.supportPhone || el.textContent;
   });
+}
+
+function updateRequestTypeLabels() {
+  if (!requestTypeSelect || !serialLabel || !innLabel || !serialInput || !innInput) {
+    return;
+  }
+
+  const isService = requestTypeSelect.value === "Сервис";
+  if (isService) {
+    serialLabel.textContent = "Название компании";
+    innLabel.textContent = "Страна/регион";
+    serialInput.placeholder = ""
+    innInput.placeholder = ""
+    innInput.inputMode = "text";
+  } else {
+    serialLabel.textContent = "Заводской номер прибора";
+    innLabel.textContent = "ИНН компании";
+    serialInput.placeholder = "";
+    innInput.placeholder = "";
+    innInput.inputMode = "numeric";
+  }
 }
 
 const fieldMessages = {
@@ -127,6 +153,17 @@ function showErrors(errors) {
 }
 
 if (form) {
+  requestTypeSelect = form.querySelector("select[name='requestType']");
+  serialLabel = form.querySelector("[data-field-label='serialNumber']");
+  innLabel = form.querySelector("[data-field-label='inn']");
+  serialInput = form.querySelector("input[name='serialNumber']");
+  innInput = form.querySelector("input[name='inn']");
+
+  if (requestTypeSelect) {
+    requestTypeSelect.addEventListener("change", updateRequestTypeLabels);
+    updateRequestTypeLabels();
+  }
+
   form.addEventListener("submit", async (event) => {
   event.preventDefault();
   clearErrors();

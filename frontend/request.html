@@ -30,6 +30,7 @@
           <span>Тип обращения</span>
           <select name="requestType" required>
             <option value="Обращение по продукции knock-knock">Обращение по продукции knock-knock</option>
+            <option value="Сервис">Сервис</option>
           </select>
           <span class="field-error" data-error="requestType"></span>
         </label>
@@ -65,13 +66,13 @@
         </label>
 
         <label class="field">
-          <span>Заводской номер прибора</span>
+          <span data-field-label="serialNumber">Заводской номер прибора</span>
           <input type="text" name="serialNumber" />
           <span class="field-error" data-error="serialNumber"></span>
         </label>
 
         <label class="field">
-          <span>ИНН компании</span>
+          <span data-field-label="inn">ИНН компании</span>
           <input type="text" name="inn" inputmode="numeric" />
           <span class="field-error" data-error="inn"></span>
         </label>
