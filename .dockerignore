@@ -1,0 +1,7 @@
+.git
+**/.DS_Store
+**/node_modules
+backend/bin
+frontend/node_modules
+.env
+.env.*

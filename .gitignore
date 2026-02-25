@@ -1,0 +1,36 @@
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+bin/
+dist/
+build/
+
+# Go coverage
+coverage*
+
+# Node artifacts (if used)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE/editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+**/.dockerignore.bak

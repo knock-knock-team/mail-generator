@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Оставить заявку — техподдержка knock-knock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Spectral:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <header class="request-hero">
+    <div>
+      <p class="eyebrow">Заявка в техподдержку</p>
+      <h1>Оставить заявку</h1>
+      <p class="lead">Пожалуйста заполните форму заявки. Специалисты компании «<span data-config="companyName">knock-knock</span>» свяжутся с Вами в ближайшее время.</p>
+    </div>
+    <div class="hero-cta">
+      <a class="ghost" href="index.html">Назад к описанию</a>
+    </div>
+  </header>
+
+  <section class="form-section" id="request">
+    <form id="support-form" novalidate>
+      <div class="grid">
+        <label class="field">
+          <span>Тип обращения</span>
+          <select name="requestType" required>
+            <option value="Обращение по продукции knock-knock">Обращение по продукции knock-knock</option>
+          </select>
+          <span class="field-error" data-error="requestType"></span>
+        </label>
+
+        <label class="field">
+          <span>Фамилия</span>
+          <input type="text" name="lastName" autocomplete="family-name" />
+          <span class="field-error" data-error="lastName"></span>
+        </label>
+
+        <label class="field">
+          <span>Имя</span>
+          <input type="text" name="firstName" autocomplete="given-name" />
+          <span class="field-error" data-error="firstName"></span>
+        </label>
+
+        <label class="field">
+          <span>Отчество</span>
+          <input type="text" name="middleName" />
+          <span class="field-error" data-error="middleName"></span>
+        </label>
+
+        <label class="field">
+          <span>Номер телефона</span>
+          <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required />
+          <span class="field-error" data-error="phone"></span>
+        </label>
+
+        <label class="field">
+          <span>Адрес электронной почты</span>
+          <input type="email" name="email" placeholder="name@example.com" required />
+          <span class="field-error" data-error="email"></span>
+        </label>
+
+        <label class="field">
+          <span>Заводской номер прибора</span>
+          <input type="text" name="serialNumber" />
+          <span class="field-error" data-error="serialNumber"></span>
+        </label>
+
+        <label class="field">
+          <span>ИНН компании</span>
+          <input type="text" name="inn" inputmode="numeric" />
+          <span class="field-error" data-error="inn"></span>
+        </label>
+      </div>
+
+      <label class="field full">
+        <span>Сообщение</span>
+        <textarea name="message" rows="6" required></textarea>
+        <span class="field-error" data-error="message"></span>
+      </label>
+
+      <div class="captcha">
+        <div>
+          <span class="captcha-label">Код проверки</span>
+          <div class="captcha-row">
+            <span id="captcha-question">Загрузка...</span>
+            <button class="ghost" type="button" id="captcha-refresh">Обновить</button>
+          </div>
+        </div>
+        <label class="field">
+          <input type="text" name="captchaAnswer" inputmode="numeric" placeholder="Введите ответ" />
+          <span class="field-error" data-error="captcha"></span>
+        </label>
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" name="consent" />
+        <span>Соглашаюсь на обработку моих персональных данных</span>
+      </label>
+      <span class="field-error" data-error="consent"></span>
+
+      <div class="actions">
+        <button class="btn" type="submit">Отправить заявку</button>
+        <span class="status" id="form-status"></span>
+      </div>
+    </form>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
