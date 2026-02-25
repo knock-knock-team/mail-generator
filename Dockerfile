@@ -1,14 +1,15 @@
 FROM golang:1.21-alpine AS builder
 
-WORKDIR /app
-COPY backend/go.mod ./backend/go.mod
-COPY backend/main.go ./backend/main.go
-
 WORKDIR /app/backend
+COPY backend/go.mod backend/go.sum ./
 RUN go mod download
-RUN go build -o /app/server .
+
+COPY backend .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/server .
 
 FROM alpine:3.20
+
+RUN apk add --no-cache ca-certificates
 
 WORKDIR /app
 COPY --from=builder /app/server /app/server
